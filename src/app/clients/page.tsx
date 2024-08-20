@@ -8,6 +8,7 @@ import { fetcher } from '@/helpers/fetcher';
 import { useState } from 'react';
 import { ClientType } from '@/types';
 import { SettingOutlined } from '@ant-design/icons';
+import CreateEditClientModal from '../../components/createEditClientModal/createEditClientModal';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -57,16 +58,16 @@ export default function ClientsPage() {
       {error && <p>Error: something went wrong</p>}
       {data && (
         <>
-          <Button
-            type="primary"
+          <div
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               margin: '0 auto',
             }}>
-            Add client
-          </Button>
+            <CreateEditClientModal isCreate={true} />
+          </div>
+
           <Popover
             content={
               <a>

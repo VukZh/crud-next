@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { Managers } from '@/components';
 import { fetcher } from '@/helpers/fetcher';
 import { Button, Flex, Spin } from 'antd';
+import CreateEditManagerModal from '../../components/createEditManagerModal/createEditManagerModal';
 
 export default function ManagersPage() {
   const { data, isLoading, error } = useSWR(`${BASE_URL}/managers`, fetcher, {
@@ -22,16 +23,15 @@ export default function ManagersPage() {
       {error && <p>Error: something went wrong</p>}
       {data && (
         <>
-          <Button
-            type="primary"
+          <div
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               margin: '0 auto',
             }}>
-            Add manager
-          </Button>
+            <CreateEditManagerModal isCreate={true} />
+          </div>
           <Managers managers={data} />
         </>
       )}

@@ -2,6 +2,7 @@ import { Card, Space } from 'antd';
 import { ManagerType } from '@/types';
 import { Button, Flex } from 'antd';
 import { DeleteModal } from '@/components';
+import CreateEditManagerModal from '../createEditManagerModal/createEditManagerModal';
 
 export default function Manager({ id, name }: ManagerType) {
   return (
@@ -12,7 +13,8 @@ export default function Manager({ id, name }: ManagerType) {
           className="site-button-ghost-wrapper"
           style={{ marginTop: '10px' }}
           justify="space-between">
-          <Button>Edit</Button>
+          {/*<Button>Edit</Button>*/}
+          <CreateEditManagerModal isCreate={false} name={name} id={id} />
           <DeleteModal type="manager" name={name} id={id} />
         </Flex>
       </Card>

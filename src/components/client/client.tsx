@@ -1,6 +1,7 @@
 import { ClientType } from '@/types';
 import { Button, Card, Flex, Space, Typography } from 'antd';
 import { DeleteModal } from '@/components';
+import CreateEditClientModal from '../createEditClientModal/createEditClientModal';
 
 const { Title } = Typography;
 
@@ -34,7 +35,7 @@ export default function Client({
           className="site-button-ghost-wrapper"
           style={{ marginTop: '10px' }}
           justify="space-between">
-          <Button>Edit</Button>
+          <CreateEditClientModal isCreate={false} name={name} id={id} />
           <DeleteModal type="client" name={name} id={id} />
         </Flex>
       </Card>
