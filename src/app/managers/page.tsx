@@ -24,7 +24,12 @@ export default function ManagersPage() {
         <>
           <Button
             type="primary"
-            style={{ position: 'relative', top: '10px', left: '10px' }}>
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: '0 auto',
+            }}>
             Add manager
           </Button>
           <Managers managers={data} />

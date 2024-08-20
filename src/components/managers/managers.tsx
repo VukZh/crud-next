@@ -8,7 +8,7 @@ type ManagersPropsType = {
 
 export default function Managers({ managers }: ManagersPropsType) {
   return (
-    <Flex wrap gap="middle" style={{ marginTop: '20px' }}>
+    <Flex wrap gap="middle" justify="center" style={{ marginTop: '20px' }}>
       {managers.map((manager) => (
         <div key={manager.id}>
           <Manager id={manager.id} name={manager.name} />

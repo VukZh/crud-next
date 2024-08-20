@@ -9,7 +9,7 @@ type ClientsPropsType = {
 
 export default function Clients({ clients }: ClientsPropsType) {
   return (
-    <Flex wrap gap="middle" style={{ marginTop: '20px' }}>
+    <Flex wrap gap="middle" justify="center" style={{ marginTop: '20px' }}>
       {clients.map((client) => (
         <div key={client.id}>
           <Client
