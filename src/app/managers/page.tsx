@@ -1,7 +1,35 @@
-export default function Managers() {
+'use client';
+import { BASE_URL } from '@/helpers/constants';
+import useSWR from 'swr';
+import { Managers } from '@/components';
+import { fetcher } from '@/helpers/fetcher';
+import { Button, Flex, Spin } from 'antd';
+
+export default function ManagersPage() {
+  const { data, isLoading, error } = useSWR(`${BASE_URL}/managers`, fetcher, {
+    refreshInterval: 2000,
+  });
+
+  console.log(data);
+
   return (
     <div>
-      <h2>Managers</h2>
+      {isLoading && (
+        <Flex align="center" justify="center" style={{ height: '100vh' }}>
+          <Spin size="large" />
+        </Flex>
+      )}
+      {error && <p>Error: something went wrong</p>}
+      {data && (
+        <>
+          <Button
+            type="primary"
+            style={{ position: 'relative', top: '10px', left: '10px' }}>
+            Add manager
+          </Button>
+          <Managers managers={data} />
+        </>
+      )}
     </div>
   );
 }

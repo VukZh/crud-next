@@ -1,0 +1,19 @@
+import { ManagerType } from '@/types';
+import Manager from '../manager/manager';
+import { Button, Flex } from 'antd';
+
+type ManagersPropsType = {
+  managers: ManagerType[];
+};
+
+export default function Managers({ managers }: ManagersPropsType) {
+  return (
+    <Flex wrap gap="middle" style={{ marginTop: '20px' }}>
+      {managers.map((manager) => (
+        <div key={manager.id}>
+          <Manager id={manager.id} name={manager.name} />
+        </div>
+      ))}
+    </Flex>
+  );
+}
