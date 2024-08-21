@@ -19,7 +19,7 @@ const mainSlice = createSlice({
       state.clients = action.payload;
     },
     setManagers: (state, action: PayloadAction<ManagerType[]>) => {
-      state.clients = action.payload;
+      state.managers = action.payload;
     },
   },
 });

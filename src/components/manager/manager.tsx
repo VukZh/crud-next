@@ -13,8 +13,7 @@ export default function Manager({ id, name }: ManagerType) {
           className="site-button-ghost-wrapper"
           style={{ marginTop: '10px' }}
           justify="space-between">
-          {/*<Button>Edit</Button>*/}
-          <CreateEditManagerModal isCreate={false} name={name} id={id} />
+          <CreateEditManagerModal isCreate={false} id={id} />
           <DeleteModal type="manager" name={name} id={id} />
         </Flex>
       </Card>

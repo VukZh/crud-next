@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form, FormProps, Input, Modal, Select} from 'antd';
+import {useMainStore} from "@/hooks/useClientsAndManagers";
 
 type CreateEditClientModalPropsType = {
   isCreate: boolean;
@@ -21,6 +22,11 @@ const CreateEditClientModal = ({
                                  id,
                                }: CreateEditClientModalPropsType) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {clients, managers} = useMainStore();
+
+  const currClient = !isCreate ? clients.find(client => client.id === id) : null;
+  const currManager = managers.find(manager => manager?.id === currClient?.manager_id);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -70,13 +76,16 @@ const CreateEditClientModal = ({
             label="Name"
             name="name"
             rules={[{required: true, message: 'Name is required!'}]}>
-            <Input placeholder="Name"/>
+            <Input placeholder="Name" defaultValue={currClient?.name}/>
           </Form.Item>
           <Form.Item label="Manager" name='manager' rules={[{required: true, message: 'Manager is required!'}]}>
-            <Select>
+            <Select defaultValue={currManager?.name}>
               >
-              <Select.Option value="male">M1</Select.Option>
-              <Select.Option value="female">M2</Select.Option>
+              {
+                managers.map(manager =>
+                  <Select.Option value={manager.id}>{manager.name}</Select.Option>
+                )
+              }
             </Select>
           </Form.Item>
           <Form.Item<FieldType>
@@ -86,23 +95,23 @@ const CreateEditClientModal = ({
               pattern: /^\d{4}-\d{2}-\d{2}$/,
               message: 'Date must be in the format YYYY-MM-DD',
             }]}>
-            <Input placeholder="Date of birth"/>
+            <Input placeholder="Date of birth" defaultValue={currClient?.date_of_birth}/>
           </Form.Item>
           <Form.Item<FieldType>
             label="Phone"
             name="phone"
             rules={[{required: true, message: 'Phone is required!'}]}>
-            <Input placeholder="Phone"/>
+            <Input placeholder="Phone" defaultValue={currClient?.phone}/>
           </Form.Item>
           <Form.Item label="Gender" name='gender' rules={[{required: true, message: 'Gender is required!'}]}>
-            <Select>
+            <Select  defaultValue={currClient?.gender}>
               >
               <Select.Option value="male">male</Select.Option>
               <Select.Option value="female">female</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Status" name='status' rules={[{required: true, message: 'Status is required!'}]}>
-            <Select>
+            <Select  defaultValue={currClient?.status}>
               >
               <Select.Option value="active">active</Select.Option>
               <Select.Option value="archive">archive</Select.Option>

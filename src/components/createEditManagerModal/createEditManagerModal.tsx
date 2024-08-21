@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button, Form, Input, Modal } from 'antd';
 import type { FormProps } from 'antd';
 import { useRouter } from 'next/navigation';
+import {useMainStore} from "@/hooks/useClientsAndManagers";
 
 type CreateEditManagerModalPropsType = {
   isCreate: boolean;
-  name?: string;
   id?: string;
 };
 
@@ -14,10 +14,13 @@ type FieldType = {
 };
 const CreateEditManagerModal = ({
   isCreate,
-  name,
   id,
 }: CreateEditManagerModalPropsType) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {managers} = useMainStore();
+
+  const managerName = !isCreate ? managers.find(manager => manager.id === id)?.name : null;
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -67,7 +70,7 @@ const CreateEditManagerModal = ({
             label="Name"
             name="name"
             rules={[{ required: true, message: 'Name is required!' }]}>
-            <Input placeholder="Name" />
+            <Input placeholder="Name" defaultValue={managerName}/>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 14 }}>

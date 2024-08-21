@@ -1,13 +1,15 @@
-import styles from './page.module.css';
+import type {Metadata} from "next";
+import { permanentRedirect } from 'next/navigation'
+
+
+export const metadata: Metadata = {
+  title: 'CRUD Next App',
+  description: 'CRUD Next App example',
+};
 
 export default function Home() {
-  return (
-    <>
-      <main className={styles.main}>
-        <div>
-          <h1>CRUD Next App example</h1>
-        </div>
-      </main>
-    </>
-  );
+  permanentRedirect(`/managers`)
+
+  return null;
 }
+

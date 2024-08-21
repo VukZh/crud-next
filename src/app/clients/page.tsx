@@ -1,14 +1,15 @@
 'use client';
-import { Clients } from '@/components';
+import {Clients, Error, Loader} from '@/components';
 import useSWR from 'swr';
 import { Button, Checkbox, Divider, Flex, Popover, Spin } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { BASE_URL } from '@/helpers/constants';
 import { fetcher } from '@/helpers/fetcher';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { ClientType } from '@/types';
 import { SettingOutlined } from '@ant-design/icons';
 import CreateEditClientModal from '../../components/createEditClientModal/createEditClientModal';
+import {useMainStore} from "@/hooks/useClientsAndManagers";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -19,6 +20,18 @@ export default function ClientsPage() {
   const { data, isLoading, error } = useSWR(`${BASE_URL}/clients`, fetcher, {
     refreshInterval: 2000,
   });
+  const { data: dataManagers} = useSWR(`${BASE_URL}/managers`, fetcher );
+
+  useEffect(() => {
+    if (data) {
+      handleSetClients(data);
+    }
+    if (dataManagers) {
+      handleSetManagers(dataManagers);
+    }
+  }, [data, dataManagers]);
+
+  const {handleSetClients, handleSetManagers, managers} = useMainStore();
 
   const [checkedList, setCheckedList] = useState<string[]>(defaultCheckedList);
 
@@ -35,7 +48,6 @@ export default function ClientsPage() {
 
   const [openFilter, setOpenFilter] = useState(false);
   const hide = () => {
-    console.log('hide');
     setOpenFilter(false);
   };
 
@@ -51,11 +63,9 @@ export default function ClientsPage() {
   return (
     <div>
       {isLoading && (
-        <Flex align="center" justify="center" style={{ height: '100vh' }}>
-          <Spin size="large" />
-        </Flex>
+        <Loader />
       )}
-      {error && <p>Error: something went wrong</p>}
+      {error && <Error />}
       {data && (
         <>
           <div
