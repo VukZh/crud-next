@@ -45,7 +45,6 @@ const CreateEditClientModal = ({
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
     if (isCreate) {
       createClient(values);
     } else {

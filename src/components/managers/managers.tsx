@@ -1,6 +1,6 @@
 import { ManagerType } from '@/types';
 import Manager from '../manager/manager';
-import { Button, Flex } from 'antd';
+import { Flex } from 'antd';
 
 type ManagersPropsType = {
   managers: ManagerType[];

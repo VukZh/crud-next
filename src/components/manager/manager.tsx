@@ -1,6 +1,6 @@
 import { Card, Space } from 'antd';
 import { ManagerType } from '@/types';
-import { Button, Flex } from 'antd';
+import { Flex } from 'antd';
 import { DeleteModal } from '@/components';
 import CreateEditManagerModal from '../createEditManagerModal/createEditManagerModal';
 

@@ -1,6 +1,5 @@
 import { ClientType } from '@/types';
-import Manager from '../manager/manager';
-import { Button, Flex } from 'antd';
+import { Flex } from 'antd';
 import { Client } from '@/components';
 
 type ClientsPropsType = {
@@ -19,6 +18,7 @@ export default function Clients({ clients }: ClientsPropsType) {
             phone={client.phone}
             gender={client.gender}
             status={client.status}
+            manager_id={client.manager_id}
           />
         </div>
       ))}
