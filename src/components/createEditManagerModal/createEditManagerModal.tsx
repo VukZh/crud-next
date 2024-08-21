@@ -61,7 +61,7 @@ const CreateEditManagerModal = ({
       },
       body: JSON.stringify(newManager),
     });
-    mutate('/managers');
+    mutate(`${BASE_URL}/managers`);
   };
 
   const updateManager = async (id, updatedManager) => {
@@ -73,7 +73,7 @@ const CreateEditManagerModal = ({
       body: JSON.stringify(updatedManager),
     });
 
-    mutate('/managers');
+    mutate(`${BASE_URL}/managers`);
   };
 
   return (

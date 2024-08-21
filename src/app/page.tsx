@@ -1,6 +1,5 @@
-import type {Metadata} from "next";
-import { permanentRedirect } from 'next/navigation'
-
+import type { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'CRUD Next App',
@@ -8,8 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  permanentRedirect(`/managers`)
+  permanentRedirect(`/managers`);
 
   return null;
 }
-

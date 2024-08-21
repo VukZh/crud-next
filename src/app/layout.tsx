@@ -6,20 +6,17 @@ import { Provider } from 'react-redux';
 
 import './globals.css';
 import Link from 'next/link';
-import {store} from "@/store/store";
-import { usePathname } from 'next/navigation'
+import { store } from '@/store/store';
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
-
-
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <html lang="en">
@@ -33,8 +30,22 @@ export default function RootLayout({
               justifyContent: 'center',
               gap: '20px',
             }}>
-            <Link href="/managers" style={ pathname === '/managers' ? {color: 'black'} : {color: 'grey'}}>Managers page</Link>
-            <Link href="/clients" style={ pathname === '/clients' ? {color: 'black'} : {color: 'grey'}}>Clients page</Link>
+            <Link
+              href="/managers"
+              style={
+                pathname === '/managers'
+                  ? { color: 'black' }
+                  : { color: 'grey' }
+              }>
+              Managers page
+            </Link>
+            <Link
+              href="/clients"
+              style={
+                pathname === '/clients' ? { color: 'black' } : { color: 'grey' }
+              }>
+              Clients page
+            </Link>
           </nav>
           <Provider store={store}>{children}</Provider>
         </AntdRegistry>

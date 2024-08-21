@@ -1,20 +1,17 @@
-'use client'
+'use client';
 import { BASE_URL } from '@/helpers/constants';
 import useSWR from 'swr';
 import { Managers } from '@/components';
 import { fetcher } from '@/helpers/fetcher';
-import { Button, Flex, Spin } from 'antd';
 import CreateEditManagerModal from '../../components/createEditManagerModal/createEditManagerModal';
 import { Loader, Error } from '@/components';
-import {useEffect} from "react";
-import {useMainStore} from "@/hooks/useClientsAndManagers";
+import { useEffect } from 'react';
+import { useMainStore } from '@/hooks/useClientsAndManagers';
 
 export default function ManagersPage() {
-  const { data, isLoading, error } = useSWR(`${BASE_URL}/managers`, fetcher, {
-    refreshInterval: 2000,
-  });
+  const { data, isLoading, error } = useSWR(`${BASE_URL}/managers`, fetcher);
 
-  const {handleSetManagers} = useMainStore();
+  const { handleSetManagers } = useMainStore();
 
   useEffect(() => {
     if (data) {
@@ -24,9 +21,7 @@ export default function ManagersPage() {
 
   return (
     <div>
-      {isLoading && (
-        <Loader />
-      )}
+      {isLoading && <Loader />}
       {error && <Error />}
       {data && (
         <>

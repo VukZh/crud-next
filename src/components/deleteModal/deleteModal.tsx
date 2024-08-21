@@ -1,8 +1,8 @@
-import { mutate } from 'swr'
+import { mutate } from 'swr';
 
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-import {BASE_URL} from "@/helpers/constants";
+import { BASE_URL } from '@/helpers/constants';
 
 type DeleteModalPropsType = {
   type: 'client' | 'manager';
@@ -25,14 +25,17 @@ const DeleteModal = ({ type, id, name }: DeleteModalPropsType) => {
   };
 
   const deleteManager = async () => {
-    await fetch(`${BASE_URL}/${type === 'client' ? 'clients' : 'managers'}/${id}`, {
-      method: 'DELETE',
-    });
+    await fetch(
+      `${BASE_URL}/${type === 'client' ? 'clients' : 'managers'}/${id}`,
+      {
+        method: 'DELETE',
+      },
+    );
 
     if (type === 'client') {
-      mutate('/clients');
+      mutate(`${BASE_URL}/clients`);
     } else {
-      mutate('/managers');
+      mutate(`${BASE_URL}/managers`);
     }
 
     setIsModalOpen(false);

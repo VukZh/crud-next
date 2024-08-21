@@ -1,15 +1,15 @@
 'use client';
-import {Clients, Error, Loader} from '@/components';
+import { Clients, Error, Loader } from '@/components';
 import useSWR from 'swr';
 import { Button, Checkbox, Divider, Flex, Popover, Spin } from 'antd';
 import type { CheckboxProps } from 'antd';
 import { BASE_URL } from '@/helpers/constants';
 import { fetcher } from '@/helpers/fetcher';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { ClientType } from '@/types';
 import { SettingOutlined } from '@ant-design/icons';
 import CreateEditClientModal from '../../components/createEditClientModal/createEditClientModal';
-import {useMainStore} from "@/hooks/useClientsAndManagers";
+import { useMainStore } from '@/hooks/useClientsAndManagers';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -17,10 +17,8 @@ const plainOptions = ['active', 'archive', 'pending'];
 const defaultCheckedList = ['active', 'archive', 'pending'];
 
 export default function ClientsPage() {
-  const { data, isLoading, error } = useSWR(`${BASE_URL}/clients`, fetcher, {
-    refreshInterval: 2000,
-  });
-  const { data: dataManagers} = useSWR(`${BASE_URL}/managers`, fetcher );
+  const { data, isLoading, error } = useSWR(`${BASE_URL}/clients`, fetcher);
+  const { data: dataManagers } = useSWR(`${BASE_URL}/managers`, fetcher);
 
   useEffect(() => {
     if (data) {
@@ -31,7 +29,7 @@ export default function ClientsPage() {
     }
   }, [data, dataManagers]);
 
-  const {handleSetClients, handleSetManagers, managers} = useMainStore();
+  const { handleSetClients, handleSetManagers, managers } = useMainStore();
 
   const [checkedList, setCheckedList] = useState<string[]>(defaultCheckedList);
 
@@ -62,9 +60,7 @@ export default function ClientsPage() {
 
   return (
     <div>
-      {isLoading && (
-        <Loader />
-      )}
+      {isLoading && <Loader />}
       {error && <Error />}
       {data && (
         <>
